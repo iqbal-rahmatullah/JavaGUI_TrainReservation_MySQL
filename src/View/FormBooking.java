@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.TransactionController;
 import Model.Customer;
 import Model.Kereta;
 import Model.Seat;
@@ -21,13 +22,19 @@ public class FormBooking extends javax.swing.JFrame {
      */
     
     static List<Customer> daftarPenumpang;
+    private String tanggal;
 
     public FormBooking(List<Seat> seatSelected, Kereta kereta, int jumlahTicket, String tanggal) {
         initComponents();
+        this.tanggal = tanggal;
+        
         daftarPenumpang = new ArrayList<Customer>();
         keretaField.setText(kereta.getNama());
-        System.out.println(seatSelected);
         ruteField.setText(kereta.getAsal() + " - " + kereta.getTujuan());
+        for(Seat itemSeat : seatSelected) {
+            seatField.setText(seatField.getText() + itemSeat.getSeat() + "( " + itemSeat.getTipe() + " )" + ", ");
+        }
+        dateField.setText(tanggal);
     }
 
     /**
@@ -230,7 +237,7 @@ public class FormBooking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
-//        TicketController.handleSubmit();
+          TransactionController.addTransaction(tanggal);
     }//GEN-LAST:event_btnBookingActionPerformed
 
     private void btnTambahPenumpangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahPenumpangActionPerformed

@@ -86,12 +86,14 @@ public class TicketController {
         private int jumlahTicket;
         private List<Ticket> seatSold;
         private String tipe;
+        private List<String> checkSeat;
 
         public handleSelectSeat(JToggleButton[] btnSeat, int jumlahTicket, List<Ticket> seatSold, String tipe) {
             this.btnSeat = btnSeat;
             this.jumlahTicket = jumlahTicket;
             this.seatSold = seatSold;
             this.tipe = tipe;
+            this.checkSeat = new ArrayList<String>();
 
             ActionListener seatSelectionListener = new ActionListener() {
 
@@ -116,16 +118,18 @@ public class TicketController {
                     newSeat.setSeat(seat.getText());
                     newSeat.setTipe((String) seat.getClientProperty("tipe"));
                     seatSelected.add(newSeat);
+                    checkSeat.add(seat.getText());
                 } else {
                     seat.setForeground(null);
                     seatSelected.removeIf(s -> s.getSeat().equalsIgnoreCase(seat.getText()));
+                    checkSeat.removeIf(s -> s.equalsIgnoreCase(seat.getText()));
                 }
             }
 
             //Pengecekan jumlah order
             if (seatSelected.size() >= jumlahTicket) {
                 for (JToggleButton seat : btnSeat) {
-                    if (!seatSelected.contains(seat.getText())) {
+                    if (!checkSeat.contains(seat.getText())) {
                         seat.setEnabled(false);
                     }
                 }
