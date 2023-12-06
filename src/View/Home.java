@@ -208,13 +208,13 @@ public class Home extends javax.swing.JFrame {
 
     private void btn_localTrainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_localTrainMouseClicked
         FormTicket ticketFrame = new FormTicket("lokal");
-        ticketFrame.setEnabled(true);
+        ticketFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_localTrainMouseClicked
 
     private void btn_intercityTrainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_intercityTrainMouseClicked
-        FormTicket ticketFrame = new FormTicket("Antarkota"); 
-        ticketFrame.setEnabled(true);
+        FormTicket ticketFrame = new FormTicket("antarkota"); 
+        ticketFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_btn_intercityTrainMouseClicked
 

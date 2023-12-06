@@ -9,5 +9,5 @@ package DAO;
  * @author iqbalrahmatullah
  */
 public interface TransactionImplement {
-    public void insertTransaction(String tanggal);
+    public int insertTransaction(String tanggal);
 }

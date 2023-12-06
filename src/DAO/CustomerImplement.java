@@ -4,11 +4,13 @@
  */
 package DAO;
 import Model.Customer;
+import Model.Kereta;
+import Model.Seat;
 
 /**
  *
  * @author iqbalrahmatullah
  */
 public interface CustomerImplement {
-    public void insertCustomer(Customer customer);
+    public void insertCustomer(Customer customer, int idTransaction, Kereta kereta, Seat seat, String tanggal);
 }

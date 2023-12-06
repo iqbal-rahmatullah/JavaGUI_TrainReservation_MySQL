@@ -24,6 +24,8 @@ public class FormTicket extends javax.swing.JFrame {
     public FormTicket(String tipe) {
         initComponents();
         this.tipe = tipe;
+        
+        Train1.setText(Train1.getText() + " " + tipe.toUpperCase());
         tanggalField.setMinSelectableDate(new Date());
     }
 
@@ -79,7 +81,7 @@ public class FormTicket extends javax.swing.JFrame {
         Train1.setFont(new java.awt.Font("PT Sans Narrow", 1, 36)); // NOI18N
         Train1.setForeground(new java.awt.Color(255, 255, 255));
         Train1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        Train1.setText("KERETA LOCAL");
+        Train1.setText("KERETA");
 
         buttonHome.setBackground(new java.awt.Color(255, 153, 0));
         buttonHome.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
@@ -234,7 +236,7 @@ public class FormTicket extends javax.swing.JFrame {
     }//GEN-LAST:event_asalFieldItemStateChanged
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        KeretaController.SearchKereta(asalField, tujuanField, tanggalField, penumpangField, "Lokal");
+        KeretaController.SearchKereta(asalField, tujuanField, tanggalField, penumpangField, tipe);
         this.dispose();
     }//GEN-LAST:event_btnCariActionPerformed
 

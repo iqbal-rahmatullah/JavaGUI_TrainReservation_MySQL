@@ -4,7 +4,10 @@
  */
 package DAO;
 
+import Database.Koneksi;
+import Model.Seat;
 import Model.Ticket;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 import java.sql.Statement;
@@ -12,6 +15,8 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import Model.Kereta;
 
 /**
  *
@@ -38,6 +43,25 @@ public class TicketDAO implements TicketImplement{
         } catch (SQLException ex) {
             Logger.getLogger(TicketDAO.class.getName()).log(Level.SEVERE, null, ex);
             return null;
+        }
+    }
+
+    @Override
+    public void insertTicket(int idTransaction, int idCustomer,Kereta kereta, Seat seat, String tanggal) {
+        try {
+            PreparedStatement statement = Koneksi.getConnection().prepareStatement("INSERT INTO ticket (id, customer_id, kereta_id, transaction_id, seat, tipe, date) VALUES (null, ?, ?, ?, ?, ?, ?)");
+
+            statement.setInt(1, idCustomer);
+            statement.setInt(2, kereta.getId());
+            statement.setInt(3, idTransaction);
+            statement.setString(4, seat.getSeat());
+            statement.setString(5, seat.getTipe());
+            statement.setString(6, tanggal);
+            
+            statement.executeUpdate();
+            statement.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(KeretaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

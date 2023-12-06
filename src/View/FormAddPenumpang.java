@@ -5,10 +5,6 @@
 package View;
 
 import Model.Customer;
-import static View.FormBooking.penumpangField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.List;
 
 /**
  *
@@ -188,6 +184,8 @@ public class FormAddPenumpang extends javax.swing.JFrame {
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
         Customer newCustomer = new Customer();
         newCustomer.setNama(fieldNama.getText());
+        newCustomer.setNo_hp(fieldHp.getText());
+        newCustomer.setNo_ktp(fieldKtp.getText());
         FormBooking.daftarPenumpang.add(newCustomer);
         FormBooking.penumpangField.setText(Integer.toString(FormBooking.daftarPenumpang.size()));
         this.dispose();

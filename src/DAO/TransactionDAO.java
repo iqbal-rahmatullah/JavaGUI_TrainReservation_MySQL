@@ -3,32 +3,41 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package DAO;
+
 import Database.Koneksi;
 import java.sql.SQLException;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.sql.PreparedStatement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author iqbalrahmatullah
  */
-public class TransactionDAO implements TransactionImplement{
+public class TransactionDAO implements TransactionImplement {
 
     @Override
-    public void insertTransaction(String tanggal) {
+    public int insertTransaction(String tanggal) {
+         int id = 0;
         try {
-             PreparedStatement statement = Koneksi.getConnection().prepareStatement("INSERT INTO transaction (id, date) VALUES (null, ?)");
-             
-             statement.setString(1, tanggal);
-             statement.executeUpdate();
-             statement.close();
-             
-             JOptionPane.showMessageDialog(null, "Berhasil melakukan transaction", "Success", JOptionPane.INFORMATION_MESSAGE);
+            PreparedStatement statement = Koneksi.getConnection().prepareStatement("INSERT INTO transaction (id, date) VALUES (null, ?)", Statement.RETURN_GENERATED_KEYS);
+
+            statement.setString(1, tanggal);
+            int affectedRows = statement.executeUpdate();
+
+            if (affectedRows > 0) {
+                ResultSet generatedKeys = statement.getGeneratedKeys();
+                if (generatedKeys.next()) {
+                    id = generatedKeys.getInt(1);
+                }
+            }
+            statement.close();
         } catch (SQLException ex) {
             Logger.getLogger(KeretaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return id;
     }
-    
+
 }

@@ -155,4 +155,6 @@ public class TicketController {
         FormBooking formBook = new FormBooking(seatSelected, kereta, jumlahTicket, tanggal);
         formBook.setVisible(true);
     }
+    
+    
 }

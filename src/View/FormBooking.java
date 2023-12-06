@@ -4,12 +4,14 @@
  */
 package View;
 
+import Controller.CustomerController;
 import Controller.TransactionController;
 import Model.Customer;
 import Model.Kereta;
 import Model.Seat;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,18 +22,21 @@ public class FormBooking extends javax.swing.JFrame {
     /**
      * Creates new form FormBooking
      */
-    
     static List<Customer> daftarPenumpang;
     private String tanggal;
+    private List<Seat> seatSelected;
+    private Kereta kereta;
 
     public FormBooking(List<Seat> seatSelected, Kereta kereta, int jumlahTicket, String tanggal) {
         initComponents();
         this.tanggal = tanggal;
-        
+        this.seatSelected = seatSelected;
+        this.kereta = kereta;
+
         daftarPenumpang = new ArrayList<Customer>();
         keretaField.setText(kereta.getNama());
         ruteField.setText(kereta.getAsal() + " - " + kereta.getTujuan());
-        for(Seat itemSeat : seatSelected) {
+        for (Seat itemSeat : seatSelected) {
             seatField.setText(seatField.getText() + itemSeat.getSeat() + "( " + itemSeat.getTipe() + " )" + ", ");
         }
         dateField.setText(tanggal);
@@ -237,7 +242,11 @@ public class FormBooking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
-          TransactionController.addTransaction(tanggal);
+        int idTransaction = TransactionController.addTransaction(tanggal);
+        for (int i = 0; i < daftarPenumpang.size(); i++) {
+            CustomerController.addCustomer(daftarPenumpang.get(i), idTransaction, kereta, seatSelected.get(i), tanggal);
+        }
+        JOptionPane.showMessageDialog(null, "Berhasil melakukan pemesanan", "Success", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_btnBookingActionPerformed
 
     private void btnTambahPenumpangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahPenumpangActionPerformed

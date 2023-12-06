@@ -10,7 +10,7 @@ import DAO.TransactionDAO;
  * @author iqbalrahmatullah
  */
 public class TransactionController {
-    public static void addTransaction(String tanggal) {
-        new TransactionDAO().insertTransaction(tanggal);
+    public static int addTransaction(String tanggal) {
+        return new TransactionDAO().insertTransaction(tanggal);
     }
 }
