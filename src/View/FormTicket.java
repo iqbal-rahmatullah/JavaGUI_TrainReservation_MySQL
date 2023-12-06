@@ -147,7 +147,7 @@ public class FormTicket extends javax.swing.JFrame {
         tujuanLabel.setForeground(new java.awt.Color(102, 102, 102));
         tujuanLabel.setText("Masukkan Tujuan :");
 
-        penumpangField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Orang", "2 Orang", "3 Orang", "4 Orang", "5 Orang", "6 Orang", "7 Orang", "8 Orang", "9 Orang", "10 Orang" }));
+        penumpangField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1 Orang", "2 Orang", "3 Orang", "4 Orang", "5 Orang", "6 Orang", "7 Orang", "8 Orang", "9 Orang" }));
         penumpangField.setToolTipText("");
 
         penumpangLabel.setFont(new java.awt.Font("Kohinoor Telugu", 1, 13)); // NOI18N
@@ -234,7 +234,7 @@ public class FormTicket extends javax.swing.JFrame {
     }//GEN-LAST:event_asalFieldItemStateChanged
 
     private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
-        KeretaController.SearchKereta(asalField, tujuanField, tanggalField, penumpangField, tipe);
+        KeretaController.SearchKereta(asalField, tujuanField, tanggalField, penumpangField, "Lokal");
         this.dispose();
     }//GEN-LAST:event_btnCariActionPerformed
 

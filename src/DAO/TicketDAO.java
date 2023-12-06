@@ -21,11 +21,11 @@ public class TicketDAO implements TicketImplement{
     private List<Ticket> allTicket;
 
     @Override
-    public List<Ticket> getSeat(int kereta_id) {
+    public List<Ticket> getSeat(int kereta_id, String tanggal) {
         allTicket = new ArrayList<Ticket>();
         try {
             Statement statement = Database.Koneksi.getConnection().createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM ticket WHERE kereta_id='" + kereta_id + "'");
+            ResultSet result = statement.executeQuery("SELECT * FROM ticket WHERE kereta_id='" + kereta_id + "' AND date='" + tanggal + "'");
             
             while(result.next()) {
                 Ticket tiket = new Ticket();

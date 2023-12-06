@@ -20,10 +20,17 @@ public class SelectSeat extends javax.swing.JFrame {
      * Creates new form SelectSeat
      */
     private List<Ticket> allTickets;
+    private Kereta kereta;
+    private int jumlahTicket;
+    private String tanggal;
     
-    public SelectSeat(Kereta kereta, int jumlahTicket, String tipe) {
+    public SelectSeat(Kereta kereta, int jumlahTicket, String tipe, String tanggal) {
         initComponents();
-        allTickets = TicketController.getSeat(kereta.getId());
+        this.kereta = kereta;
+        this.jumlahTicket = jumlahTicket;
+        this.tanggal = tanggal;
+        
+        allTickets = TicketController.getSeat(kereta.getId(), tanggal);
         TicketController.displayButtonSeat(allTickets, SeatPanel, jumlahTicket, tipe, buttonCheckout);
     }
 
@@ -155,7 +162,8 @@ public class SelectSeat extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonHomeActionPerformed
 
     private void buttonCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCheckoutActionPerformed
-        TicketController.handleSubmit();
+        TicketController.handleSubmit(kereta, jumlahTicket, tanggal);
+        this.dispose();
     }//GEN-LAST:event_buttonCheckoutActionPerformed
 
     /**
@@ -189,7 +197,7 @@ public class SelectSeat extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelectSeat(null, 0, "").setVisible(true);
+                new SelectSeat(null, 0, "", "").setVisible(true);
             }
         });
     }

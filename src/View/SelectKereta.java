@@ -6,6 +6,7 @@ package View;
 
 import Controller.KeretaController;
 import Model.Kereta;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,11 +20,11 @@ public class SelectKereta extends javax.swing.JFrame {
      */
     List<Kereta> allKereta;
     
-    public SelectKereta(String asal, String tujuan, int jumlahTicket, String tipe ) {
+    public SelectKereta(String asal, String tujuan, int jumlahTicket, String tipe, String tanggal ) {
         initComponents();
         allKereta = KeretaController.getKereta(asal, tujuan);
         
-        new KeretaController().displayButtonKereta(keretaPanel, allKereta, jumlahTicket, tipe, this);
+        new KeretaController().displayButtonKereta(keretaPanel, allKereta, jumlahTicket, tipe, this, tanggal);
     }
 
     /**
@@ -315,7 +316,7 @@ public class SelectKereta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new SelectKereta("", "", 0, "").setVisible(true);
+                new SelectKereta("", "", 0, "", null).setVisible(true);
             }
         });
     }

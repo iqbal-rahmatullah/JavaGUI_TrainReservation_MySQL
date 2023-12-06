@@ -5,7 +5,10 @@
 package Controller;
 
 import DAO.TicketDAO;
+import Model.Kereta;
+import Model.Seat;
 import Model.Ticket;
+import View.FormBooking;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.GridLayout;
@@ -26,10 +29,10 @@ import javax.swing.border.TitledBorder;
 public class TicketController {
 
     private static List<Ticket> allTicket;
-    private static List<String> seatSelected;
+    private static List<Seat> seatSelected;
 
-    public static List<Ticket> getSeat(int keretaId) {
-        allTicket = new TicketDAO().getSeat(keretaId);
+    public static List<Ticket> getSeat(int keretaId, String tanggal) {
+        allTicket = new TicketDAO().getSeat(keretaId, tanggal);
         return allTicket;
     }
 
@@ -104,15 +107,18 @@ public class TicketController {
         }
 
         public void getSelectedSeat() {
-            TicketController.seatSelected = new ArrayList<String>();
+            TicketController.seatSelected = new ArrayList<Seat>();
 
             for (JToggleButton seat : btnSeat) {
                 if (seat.isSelected()) {
                     seat.setForeground(Color.BLUE);
-                    seatSelected.add(seat.getText());
+                    Seat newSeat = new Seat();
+                    newSeat.setSeat(seat.getText());
+                    newSeat.setTipe((String) seat.getClientProperty("tipe"));
+                    seatSelected.add(newSeat);
                 } else {
                     seat.setForeground(null);
-                    seatSelected.removeIf(s -> s.equalsIgnoreCase(seat.getText()));
+                    seatSelected.removeIf(s -> s.getSeat().equalsIgnoreCase(seat.getText()));
                 }
             }
 
@@ -141,7 +147,8 @@ public class TicketController {
             }
         }
     }
-    public static void handleSubmit(){
-            System.out.println(seatSelected);
+    public static void handleSubmit(Kereta kereta, int jumlahTicket, String tanggal){
+        FormBooking formBook = new FormBooking(seatSelected, kereta, jumlahTicket, tanggal);
+        formBook.setVisible(true);
     }
 }

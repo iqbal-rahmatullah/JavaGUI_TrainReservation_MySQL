@@ -12,5 +12,5 @@ import Model.Ticket;
  * @author iqbalrahmatullah
  */
 public interface TicketImplement {
-    public List<Ticket> getSeat(int kereta_id);
+    public List<Ticket> getSeat(int kereta_id, String tanggal);
 }

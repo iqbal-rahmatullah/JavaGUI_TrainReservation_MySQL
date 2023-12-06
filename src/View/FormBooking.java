@@ -4,7 +4,11 @@
  */
 package View;
 
-import Controller.TicketController;
+import Model.Customer;
+import Model.Kereta;
+import Model.Seat;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -15,9 +19,15 @@ public class FormBooking extends javax.swing.JFrame {
     /**
      * Creates new form FormBooking
      */
+    
+    static List<Customer> daftarPenumpang;
 
-    public FormBooking() {
+    public FormBooking(List<Seat> seatSelected, Kereta kereta, int jumlahTicket, String tanggal) {
         initComponents();
+        daftarPenumpang = new ArrayList<Customer>();
+        keretaField.setText(kereta.getNama());
+        System.out.println(seatSelected);
+        ruteField.setText(kereta.getAsal() + " - " + kereta.getTujuan());
     }
 
     /**
@@ -33,8 +43,19 @@ public class FormBooking extends javax.swing.JFrame {
         Applogo = new javax.swing.JLabel();
         Train = new javax.swing.JLabel();
         Train1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        keretaLabel = new javax.swing.JLabel();
+        keretaField = new javax.swing.JTextField();
+        seatLabel = new javax.swing.JLabel();
+        seatField = new javax.swing.JTextField();
+        dateLabel = new javax.swing.JLabel();
+        dateField = new javax.swing.JTextField();
+        penumpangLabel = new javax.swing.JLabel();
+        penumpangField = new javax.swing.JTextField();
+        btnTambahPenumpang = new javax.swing.JButton();
         btnBooking = new javax.swing.JButton();
-        formPanel = new javax.swing.JScrollPane();
+        ruteLabel = new javax.swing.JLabel();
+        ruteField = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -56,8 +77,8 @@ public class FormBooking extends javax.swing.JFrame {
         rightPanel.setLayout(rightPanelLayout);
         rightPanelLayout.setHorizontalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
-                .addContainerGap(88, Short.MAX_VALUE)
+            .addGroup(rightPanelLayout.createSequentialGroup()
+                .addGap(81, 81, 81)
                 .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Train1)
                     .addGroup(rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -67,19 +88,46 @@ public class FormBooking extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, rightPanelLayout.createSequentialGroup()
                             .addComponent(Applogo)
                             .addGap(54, 54, 54))))
-                .addGap(75, 75, 75))
+                .addContainerGap(82, Short.MAX_VALUE))
         );
         rightPanelLayout.setVerticalGroup(
             rightPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(rightPanelLayout.createSequentialGroup()
-                .addGap(94, 94, 94)
+                .addGap(62, 62, 62)
                 .addComponent(Applogo)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Train1)
-                .addGap(2, 2, 2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(Train)
-                .addContainerGap(126, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        keretaLabel.setText("Kereta :");
+
+        keretaField.setEnabled(false);
+
+        seatLabel.setText("Seat :");
+
+        seatField.setEnabled(false);
+
+        dateLabel.setText("Tanggal :");
+
+        dateField.setEnabled(false);
+
+        penumpangLabel.setText("Penumpang :");
+
+        penumpangField.setText("0");
+        penumpangField.setEnabled(false);
+
+        btnTambahPenumpang.setBackground(new java.awt.Color(51, 255, 51));
+        btnTambahPenumpang.setFont(new java.awt.Font("Helvetica Neue", 1, 13)); // NOI18N
+        btnTambahPenumpang.setForeground(new java.awt.Color(255, 255, 255));
+        btnTambahPenumpang.setText("Isi Data Penumpang");
+        btnTambahPenumpang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnTambahPenumpangActionPerformed(evt);
+            }
+        });
 
         btnBooking.setBackground(new java.awt.Color(51, 51, 255));
         btnBooking.setFont(new java.awt.Font("Helvetica Neue", 1, 18)); // NOI18N
@@ -91,31 +139,90 @@ public class FormBooking extends javax.swing.JFrame {
             }
         });
 
+        ruteLabel.setText("Rute :");
+
+        ruteField.setEnabled(false);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(penumpangLabel)
+                            .addComponent(dateLabel))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(penumpangField, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnTambahPenumpang)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(10, 10, 10)
+                                        .addComponent(btnBooking))))))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(keretaLabel)
+                            .addComponent(ruteLabel)
+                            .addComponent(seatLabel))
+                        .addGap(49, 49, 49)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(seatField, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ruteField, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(keretaField, javax.swing.GroupLayout.PREFERRED_SIZE, 269, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(11, 11, 11)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(keretaLabel)
+                    .addComponent(keretaField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 13, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ruteLabel)
+                    .addComponent(ruteField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(seatLabel)
+                    .addComponent(seatField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(dateLabel)
+                    .addComponent(dateField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(penumpangLabel)
+                    .addComponent(penumpangField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnTambahPenumpang))
+                .addGap(45, 45, 45)
+                .addComponent(btnBooking)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btnBooking)
-                        .addGap(113, 113, 113))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(formPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 323, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(15, Short.MAX_VALUE))))
+                .addGap(18, 18, 18)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(rightPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(formPanel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBooking)
-                .addGap(22, 22, 22))
+                .addContainerGap(67, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(45, 45, 45))
         );
 
         pack();
@@ -123,8 +230,13 @@ public class FormBooking extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
-        TicketController.handleSubmit();
+//        TicketController.handleSubmit();
     }//GEN-LAST:event_btnBookingActionPerformed
+
+    private void btnTambahPenumpangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahPenumpangActionPerformed
+        FormAddPenumpang formPenumpang = new FormAddPenumpang();
+        formPenumpang.setVisible(true);
+    }//GEN-LAST:event_btnTambahPenumpangActionPerformed
 
     /**
      * @param args the command line arguments
@@ -156,7 +268,7 @@ public class FormBooking extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FormBooking().setVisible(true);
+                new FormBooking(null, null, 0, "").setVisible(true);
             }
         });
     }
@@ -166,7 +278,21 @@ public class FormBooking extends javax.swing.JFrame {
     private javax.swing.JLabel Train;
     private javax.swing.JLabel Train1;
     private javax.swing.JButton btnBooking;
-    private javax.swing.JScrollPane formPanel;
+    private javax.swing.JButton btnTambahPenumpang;
+    private javax.swing.JButton buttonHome;
+    private javax.swing.JButton buttonHome1;
+    private javax.swing.JButton buttonHome2;
+    private javax.swing.JTextField dateField;
+    private javax.swing.JLabel dateLabel;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField keretaField;
+    private javax.swing.JLabel keretaLabel;
+    public static javax.swing.JTextField penumpangField;
+    private javax.swing.JLabel penumpangLabel;
     private javax.swing.JPanel rightPanel;
+    private javax.swing.JTextField ruteField;
+    private javax.swing.JLabel ruteLabel;
+    private javax.swing.JTextField seatField;
+    private javax.swing.JLabel seatLabel;
     // End of variables declaration//GEN-END:variables
 }
