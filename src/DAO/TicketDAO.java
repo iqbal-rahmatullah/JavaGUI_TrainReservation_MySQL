@@ -22,7 +22,8 @@ import Model.Kereta;
  *
  * @author iqbalrahmatullah
  */
-public class TicketDAO implements TicketImplement{
+public class TicketDAO implements TicketImplement {
+
     private List<Ticket> allTicket;
 
     @Override
@@ -31,8 +32,8 @@ public class TicketDAO implements TicketImplement{
         try {
             Statement statement = Database.Koneksi.getConnection().createStatement();
             ResultSet result = statement.executeQuery("SELECT * FROM ticket WHERE kereta_id='" + kereta_id + "' AND date='" + tanggal + "'");
-            
-            while(result.next()) {
+
+            while (result.next()) {
                 Ticket tiket = new Ticket();
                 tiket.setSeat(result.getString("seat"));
                 allTicket.add(tiket);
@@ -47,7 +48,7 @@ public class TicketDAO implements TicketImplement{
     }
 
     @Override
-    public void insertTicket(int idTransaction, int idCustomer,Kereta kereta, Seat seat, String tanggal) {
+    public void insertTicket(int idTransaction, int idCustomer, Kereta kereta, Seat seat, String tanggal) {
         try {
             PreparedStatement statement = Koneksi.getConnection().prepareStatement("INSERT INTO ticket (id, customer_id, kereta_id, transaction_id, seat, tipe, date) VALUES (null, ?, ?, ?, ?, ?, ?)");
 
@@ -57,12 +58,23 @@ public class TicketDAO implements TicketImplement{
             statement.setString(4, seat.getSeat());
             statement.setString(5, seat.getTipe());
             statement.setString(6, tanggal);
-            
+
             statement.executeUpdate();
             statement.close();
         } catch (SQLException ex) {
             Logger.getLogger(KeretaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+
+    @Override
+    public ResultSet getDetailTransaction(String id) {
+        ResultSet result = null;
+        try {
+            Statement statement = Database.Koneksi.getConnection().createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY);
+            result = statement.executeQuery("SELECT * FROM customer JOIN ticket ON ticket.customer_id = customer.id JOIN kereta ON ticket.kereta_id = kereta.id WHERE ticket.transaction_id=" + Integer.parseInt(id));
+        } catch (SQLException ex) {
+            Logger.getLogger(KeretaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

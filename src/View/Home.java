@@ -213,12 +213,14 @@ public class Home extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_localTrainMouseClicked
 
     private void btn_intercityTrainMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_intercityTrainMouseClicked
-        FormTicket ticketFrame = new FormTicket("antarkota"); 
-        ticketFrame.setVisible(true);
-        this.dispose();
+//        FormTicket ticketFrame = new FormTicket("antarkota"); 
+//        ticketFrame.setVisible(true);
+//        this.dispose();
     }//GEN-LAST:event_btn_intercityTrainMouseClicked
 
     private void buttonHistoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonHistoryActionPerformed
+        HistoryTransaction historyPage = new HistoryTransaction();
+        historyPage.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_buttonHistoryActionPerformed
 

@@ -188,6 +188,12 @@ public class FormAddPenumpang extends javax.swing.JFrame {
         newCustomer.setNo_ktp(fieldKtp.getText());
         FormBooking.daftarPenumpang.add(newCustomer);
         FormBooking.penumpangField.setText(Integer.toString(FormBooking.daftarPenumpang.size()));
+        
+        if(FormBooking.daftarPenumpang != null) {
+            if(FormBooking.daftarPenumpang.size() == FormBooking.jumlahTicket) {
+                FormBooking.btnTambahPenumpang.setEnabled(false);
+            }
+        }
         this.dispose();
     }//GEN-LAST:event_btnTambahActionPerformed
 

@@ -8,6 +8,7 @@ import Model.Seat;
 import java.util.List;
 import Model.Ticket;
 import Model.Kereta;
+import java.sql.ResultSet;
 
 /**
  *
@@ -16,4 +17,5 @@ import Model.Kereta;
 public interface TicketImplement {
     public List<Ticket> getSeat(int kereta_id, String tanggal);
     public void insertTicket(int idTransaction, int idCustomer,Kereta kereta, Seat seat, String tanggal);
+    public ResultSet getDetailTransaction(String id);
 }

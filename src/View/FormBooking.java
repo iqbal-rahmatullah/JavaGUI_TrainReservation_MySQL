@@ -22,18 +22,20 @@ public class FormBooking extends javax.swing.JFrame {
     /**
      * Creates new form FormBooking
      */
-    static List<Customer> daftarPenumpang;
+    public static List<Customer> daftarPenumpang;
     private String tanggal;
     private List<Seat> seatSelected;
     private Kereta kereta;
+    public static int jumlahTicket;
 
     public FormBooking(List<Seat> seatSelected, Kereta kereta, int jumlahTicket, String tanggal) {
         initComponents();
         this.tanggal = tanggal;
         this.seatSelected = seatSelected;
         this.kereta = kereta;
-
+        this.jumlahTicket = jumlahTicket;
         daftarPenumpang = new ArrayList<Customer>();
+
         keretaField.setText(kereta.getNama());
         ruteField.setText(kereta.getAsal() + " - " + kereta.getTujuan());
         for (Seat itemSeat : seatSelected) {
@@ -247,6 +249,9 @@ public class FormBooking extends javax.swing.JFrame {
             CustomerController.addCustomer(daftarPenumpang.get(i), idTransaction, kereta, seatSelected.get(i), tanggal);
         }
         JOptionPane.showMessageDialog(null, "Berhasil melakukan pemesanan", "Success", JOptionPane.INFORMATION_MESSAGE);
+        HistoryTransaction historyPage = new HistoryTransaction();
+        historyPage.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnBookingActionPerformed
 
     private void btnTambahPenumpangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahPenumpangActionPerformed
@@ -294,10 +299,7 @@ public class FormBooking extends javax.swing.JFrame {
     private javax.swing.JLabel Train;
     private javax.swing.JLabel Train1;
     private javax.swing.JButton btnBooking;
-    private javax.swing.JButton btnTambahPenumpang;
-    private javax.swing.JButton buttonHome;
-    private javax.swing.JButton buttonHome1;
-    private javax.swing.JButton buttonHome2;
+    public static javax.swing.JButton btnTambahPenumpang;
     private javax.swing.JTextField dateField;
     private javax.swing.JLabel dateLabel;
     private javax.swing.JPanel jPanel1;

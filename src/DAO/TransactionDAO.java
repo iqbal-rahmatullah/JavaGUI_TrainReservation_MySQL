@@ -20,7 +20,7 @@ public class TransactionDAO implements TransactionImplement {
 
     @Override
     public int insertTransaction(String tanggal) {
-         int id = 0;
+        int id = 0;
         try {
             PreparedStatement statement = Koneksi.getConnection().prepareStatement("INSERT INTO transaction (id, date) VALUES (null, ?)", Statement.RETURN_GENERATED_KEYS);
 
@@ -40,4 +40,15 @@ public class TransactionDAO implements TransactionImplement {
         return id;
     }
 
+    @Override
+    public ResultSet getTransaction() {
+        ResultSet result = null;
+        try {
+            Statement statement = Database.Koneksi.getConnection().createStatement();
+            result = statement.executeQuery("SELECT t.id, t.date, COUNT(s.transaction_id) AS jumlah_seat FROM transaction t LEFT JOIN ticket s ON t.id = s.transaction_id GROUP BY t.id, t.date");
+        } catch (SQLException ex) {
+            Logger.getLogger(KeretaDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return result;
+    }
 }

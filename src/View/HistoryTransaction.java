@@ -4,7 +4,10 @@
  */
 package View;
 
-import javax.swing.table.DefaultTableModel;
+import Controller.TransactionController;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -17,6 +20,11 @@ public class HistoryTransaction extends javax.swing.JFrame {
      */
     public HistoryTransaction() {
         initComponents();
+        try {
+            TransactionController.setHistoryTable(transactionTable, this);
+        } catch (SQLException ex) {
+            Logger.getLogger(HistoryTransaction.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -104,14 +112,14 @@ public class HistoryTransaction extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Kereta", "Rute", "Seat", "Tanggal", "Nama", "No KTP", "No HP"
+                "ID Transaction", "Jumlah", "Tanggal"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -127,10 +135,6 @@ public class HistoryTransaction extends javax.swing.JFrame {
             transactionTable.getColumnModel().getColumn(0).setResizable(false);
             transactionTable.getColumnModel().getColumn(1).setResizable(false);
             transactionTable.getColumnModel().getColumn(2).setResizable(false);
-            transactionTable.getColumnModel().getColumn(3).setResizable(false);
-            transactionTable.getColumnModel().getColumn(4).setResizable(false);
-            transactionTable.getColumnModel().getColumn(5).setResizable(false);
-            transactionTable.getColumnModel().getColumn(6).setResizable(false);
         }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -140,8 +144,8 @@ public class HistoryTransaction extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(rightPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 885, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 801, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,16 +199,6 @@ public class HistoryTransaction extends javax.swing.JFrame {
                 new HistoryTransaction().setVisible(true);
             }
         });
-    }
-    
-    public static void addTransaction(Object[] transaction) {
-        DefaultTableModel model = (DefaultTableModel) transactionTable.getModel();
-        model.addRow(transaction);
-    }
-    
-    public static void clearTransaction() {
-        DefaultTableModel model = (DefaultTableModel) transactionTable.getModel();
-        model.setRowCount(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
