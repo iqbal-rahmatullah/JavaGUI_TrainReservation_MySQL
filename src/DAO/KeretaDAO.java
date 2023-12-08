@@ -22,6 +22,13 @@ public class KeretaDAO implements KeretaImplement {
 
     private List<Kereta> allKereta;
 
+    /**
+     * Method untuk melakukan query get(mendapatkan) semua kereta yang ada berdasarkan asal dan tujuan yang di inputkan
+     *
+     * @param asal
+     * @param tujuan
+     * @return
+     */
     @Override
     public List<Kereta> getKereta(String asal, String tujuan) {
         allKereta = new ArrayList<Kereta>();
@@ -48,6 +55,12 @@ public class KeretaDAO implements KeretaImplement {
         }
     }
 
+    /**
+     * Melakukan query get (mendapatkan) tujuan dari semua kereta yang ada di database berdasarkan asal yang di pilih
+     *
+     * @param asal
+     * @return
+     */
     @Override
     public List<Kereta> getTujuan(String asal) {
         allKereta = new ArrayList<Kereta>();

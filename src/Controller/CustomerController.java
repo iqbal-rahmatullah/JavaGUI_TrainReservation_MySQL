@@ -15,10 +15,28 @@ import javax.swing.JTextField;
  * @author iqbalrahmatullah
  */
 public class CustomerController {
+
+    /**
+     * Method untuk melakukan add customer dan ticket
+     *
+     * @param customer
+     * @param idTransaction
+     * @param kereta
+     * @param seatSelected
+     * @param tanggal
+     */
     public static void addCustomer(Customer customer, int idTransaction, Kereta kereta,Seat seatSelected,String tanggal) {
         new CustomerDAO().insertCustomer(customer, idTransaction, kereta, seatSelected, tanggal);
     }
     
+    /**
+     * Method untuk menambahkan data customer ke variabel public static yang ada di page FormBooking
+     * Setelah data customer di tambahkan akan dilakukan pengecekan jumlah ticket agar data customer yang di inputkan tidak lebih dari jumlah ticket
+     *
+     * @param fieldNama
+     * @param fieldKtp
+     * @param fieldHp
+     */
     public static void inputCustomer(JTextField fieldNama, JTextField fieldKtp, JTextField fieldHp) {
         Customer newCustomer = new Customer();
         newCustomer.setNama(fieldNama.getText());

@@ -26,6 +26,13 @@ public class TicketDAO implements TicketImplement {
 
     private List<Ticket> allTicket;
 
+    /**
+     * Method untuk melakukan query SQL get(Mendapatkan) data kursi yang sudah sold out berdasarkan id kereta dan tanggal
+     *
+     * @param kereta_id
+     * @param tanggal
+     * @return
+     */
     @Override
     public List<Ticket> getSeat(int kereta_id, String tanggal) {
         allTicket = new ArrayList<Ticket>();
@@ -66,6 +73,12 @@ public class TicketDAO implements TicketImplement {
         }
     }
 
+    /**
+     * Method melakukan query sql Get all data customer yang di relasikan dengan table ticket dan kereta, berdasarkan idtransaction yang dikirim
+     *
+     * @param id
+     * @return
+     */
     @Override
     public ResultSet getDetailTransaction(String id) {
         ResultSet result = null;

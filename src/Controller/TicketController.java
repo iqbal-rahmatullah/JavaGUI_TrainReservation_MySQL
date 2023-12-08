@@ -31,11 +31,27 @@ public class TicketController {
     private static List<Ticket> allTicket;
     private static List<Seat> seatSelected;
 
+    /**
+     * Method untuk mendapatkan kursi yang sudah sold out berdasarkan keretaId dan tanggal
+     *
+     * @param keretaId
+     * @param tanggal
+     * @return
+     */
     public static List<Ticket> getSeat(int keretaId, String tanggal) {
         allTicket = new TicketDAO().getSeat(keretaId, tanggal);
         return allTicket;
     }
 
+    /**
+     * Method untuk menampilkan pilihan semua seat yang ada di kereta berupa button
+     *
+     * @param seatSold
+     * @param parentPanel
+     * @param jumlahTicket
+     * @param tipe
+     * @param btnCheckout
+     */
     public static void displayButtonSeat(List<Ticket> seatSold, JPanel parentPanel, int jumlahTicket, String tipe, JButton btnCheckout) {
         JToggleButton[] seats = new JToggleButton[80];
         JPanel leftStall = new JPanel(new GridLayout(0, 2, 2, 2));
@@ -80,6 +96,9 @@ public class TicketController {
         handleSelectSeat handleBtn = new handleSelectSeat(seats, jumlahTicket, seatSold, tipe);
     }
 
+    /**
+     * Method untuk menghandle button seat yang dipilih oleh user. Didalam method ini juga melakukan pengecekan seat yang sudah sold button nya akan di disable
+     */
     public static class handleSelectSeat {
 
         private JToggleButton[] btnSeat;
@@ -151,6 +170,14 @@ public class TicketController {
             }
         }
     }
+
+    /**
+     * Method untuk menghandle ketika user selesai memilih seat, maka data seat, kereta, jumlahticket, dan tanggal yang dipilih akan di kirim ke page formBooking
+     *
+     * @param kereta
+     * @param jumlahTicket
+     * @param tanggal
+     */
     public static void handleSubmit(Kereta kereta, int jumlahTicket, String tanggal){
         FormBooking formBook = new FormBooking(seatSelected, kereta, jumlahTicket, tanggal);
         formBook.setVisible(true);

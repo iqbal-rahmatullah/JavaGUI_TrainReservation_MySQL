@@ -4,9 +4,6 @@
  */
 package View;
 
-import trainreservations.*;
-
-
 /**
  *
  * @author iqbalrahmatullah

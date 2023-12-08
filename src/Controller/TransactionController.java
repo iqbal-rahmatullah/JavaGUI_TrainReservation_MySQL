@@ -28,10 +28,23 @@ import javax.swing.SwingConstants;
  */
 public class TransactionController {
 
+    /**
+     * Melakukan method add transaction dengan mengirim tanggal transaksi terjadi
+     *
+     * @param tanggal
+     * @return
+     */
     public static int addTransaction(String tanggal) {
         return new TransactionDAO().insertTransaction(tanggal);
     }
 
+    /**
+     * Method untuk melakukan set data transaction yang terjadi ke JTable yang ada di page HistoryTransaction
+     *
+     * @param transactionTable
+     * @param historyPage
+     * @throws SQLException
+     */
     public static void setHistoryTable(JTable transactionTable, JFrame historyPage) throws SQLException {
         ResultSet dataTransaction = new TransactionDAO().getTransaction();
         DefaultTableModel model = (DefaultTableModel) transactionTable.getModel();
@@ -52,6 +65,13 @@ public class TransactionController {
         });
     }
 
+    /**
+     * Melakukan handle ketika data transaction di click, maka akan menampilkan detail lengkap transaction tersebut
+     *
+     * @param id
+     * @param HistoryPage
+     * @throws SQLException
+     */
     public static void handleDetailTransaction(String id, JFrame HistoryPage) throws SQLException {
         ResultSet dataTransaction = new TicketDAO().getDetailTransaction(id);
         DetailTransaction detailTransactionPage = new DetailTransaction();

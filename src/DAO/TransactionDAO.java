@@ -18,6 +18,13 @@ import java.util.logging.Logger;
  */
 public class TransactionDAO implements TransactionImplement {
 
+    /**
+     * Method melakukan query insert ke table transaction
+     * Method ini melakukan return id transaction tersebut agar bisa digunakan ketika melakukan insert ke table ticket
+     *
+     * @param tanggal
+     * @return
+     */
     @Override
     public int insertTransaction(String tanggal) {
         int id = 0;
@@ -40,6 +47,11 @@ public class TransactionDAO implements TransactionImplement {
         return id;
     }
 
+    /**
+     * Melakukan query get all data transaction yang ada dan mengambil relasi juga ke table ticket.
+     *
+     * @return
+     */
     @Override
     public ResultSet getTransaction() {
         ResultSet result = null;

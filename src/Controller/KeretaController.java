@@ -30,6 +30,12 @@ public class KeretaController {
     private static List<Kereta> allKereta;
     private static List<Kereta> tujuanKereta;
 
+    /**
+     * Method untuk melakukan get tujuan berdasarkan asal yang dipilih
+     *
+     * @param asal
+     * @param fieldTujuan
+     */
     public static void getTujuanKereta(String asal, JComboBox fieldTujuan) {
         tujuanKereta = new KeretaDAO().getTujuan(asal);
         if (tujuanKereta != null) {
@@ -39,6 +45,15 @@ public class KeretaController {
         }
     }
 
+    /**
+     * Method untuk melakukan search kereta, menyimpan semua inputan user di page FormTicket, dan mengirim input an tersebut ke page SelectKereta
+     *
+     * @param asalField
+     * @param tujuanField
+     * @param tanggalField
+     * @param ticketField
+     * @param tipe
+     */
     public static void SearchKereta(JComboBox asalField, JComboBox tujuanField, JDateChooser tanggalField, JComboBox ticketField, String tipe) {
         String asal = (String) asalField.getSelectedItem();
         String tujuan = (String) tujuanField.getSelectedItem();
@@ -58,6 +73,13 @@ public class KeretaController {
         pageSelect.setVisible(true);
     }
 
+    /**
+     * Method untuk mendapatkan semua kereta yang ada di database berdasarkan asal dan tujuan yang di inputkan
+     *
+     * @param asal
+     * @param tujuan
+     * @return
+     */
     public static List<Kereta> getKereta(String asal, String tujuan) {
         if (asal == null || tujuan == null) {
             JOptionPane.showMessageDialog(null, "Wajib input asal dan tujuan", "Error", JOptionPane.ERROR_MESSAGE);
@@ -67,6 +89,16 @@ public class KeretaController {
         return allKereta;
     }
 
+    /**
+     * Method untuk menampilkan sebuah pilihan kereta yang tersedia berupa button
+     *
+     * @param panel
+     * @param allKereta
+     * @param jumlahTicket
+     * @param tipe
+     * @param keretaFrame
+     * @param tanggal
+     */
     public void displayButtonKereta(JPanel panel, List<Kereta> allKereta, int jumlahTicket, String tipe, JFrame keretaFrame, String tanggal) {
         int y = 20;
         for (Kereta kereta : allKereta) {
@@ -80,6 +112,16 @@ public class KeretaController {
         }
     }
 
+    
+    /**
+     * Method untuk menghandle button kereta yang dipilih oleh user dan mengirim semua data yang ada di parameter ke page SelectSeat
+     *
+     * @param kereta
+     * @param jumlahTicket
+     * @param tipe
+     * @param selectKeretaFrame
+     * @param tanggal
+     */
      class handleButtonKereta implements ActionListener {
 
         private Kereta kereta;
