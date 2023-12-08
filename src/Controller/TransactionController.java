@@ -7,7 +7,6 @@ package Controller;
 import DAO.TicketDAO;
 import DAO.TransactionDAO;
 import View.DetailTransaction;
-import static com.mysql.cj.protocol.x.XProtocolDecoder.instance;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -18,7 +17,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -98,11 +96,23 @@ public class TransactionController {
             label5.setBounds(6, 63, 150, 40);
             label5.setHorizontalAlignment(SwingConstants.LEFT);
             
+            JLabel label6 = new JLabel("Kereta : " + dataTransaction.getString("kereta.nama"));
+            label6.setFont(new Font("PT Sans Narrow", Font.BOLD, 13));
+            label6.setBounds(6, 88, 150, 40);
+            label6.setHorizontalAlignment(SwingConstants.LEFT);
+            
+            JLabel label7 = new JLabel("Rute : " + dataTransaction.getString("kereta.asal") + " - " + dataTransaction.getString("kereta.tujuan"));
+            label7.setFont(new Font("PT Sans Narrow", Font.BOLD, 13));
+            label7.setBounds(6, 103, 150, 40);
+            label7.setHorizontalAlignment(SwingConstants.LEFT);
+            
             ticketPanel[i].add(label);
             ticketPanel[i].add(label2);
             ticketPanel[i].add(label3);
             ticketPanel[i].add(label4);
             ticketPanel[i].add(label5);
+            ticketPanel[i].add(label6);
+            ticketPanel[i].add(label7);
             detailTransactionPage.mainPanel.add(ticketPanel[i]);
         }
 

@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controller.CustomerController;
 import Model.Customer;
 
 /**
@@ -182,18 +183,7 @@ public class FormAddPenumpang extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTambahActionPerformed
-        Customer newCustomer = new Customer();
-        newCustomer.setNama(fieldNama.getText());
-        newCustomer.setNo_hp(fieldHp.getText());
-        newCustomer.setNo_ktp(fieldKtp.getText());
-        FormBooking.daftarPenumpang.add(newCustomer);
-        FormBooking.penumpangField.setText(Integer.toString(FormBooking.daftarPenumpang.size()));
-        
-        if(FormBooking.daftarPenumpang != null) {
-            if(FormBooking.daftarPenumpang.size() == FormBooking.jumlahTicket) {
-                FormBooking.btnTambahPenumpang.setEnabled(false);
-            }
-        }
+        CustomerController.inputCustomer(fieldNama, fieldKtp, fieldHp);
         this.dispose();
     }//GEN-LAST:event_btnTambahActionPerformed
 
