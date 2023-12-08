@@ -36,8 +36,8 @@ public class KeretaController {
      * @param asal
      * @param fieldTujuan
      */
-    public static void getTujuanKereta(String asal, JComboBox fieldTujuan) {
-        tujuanKereta = new KeretaDAO().getTujuan(asal);
+    public static void getTujuanKereta(String asal, JComboBox fieldTujuan, String tipe) {
+        tujuanKereta = new KeretaDAO().getTujuan(asal, tipe);
         if (tujuanKereta != null) {
             for (Kereta value : tujuanKereta) {
                 fieldTujuan.addItem(value.getTujuan());
@@ -74,23 +74,23 @@ public class KeretaController {
     }
 
     /**
-     * Method untuk mendapatkan semua kereta yang ada di database berdasarkan asal dan tujuan yang di inputkan
+     * Method untuk mendapatkan semua kereta yang ada di database berdasarkan asal dan tujuan yang di inputkan, serta tipe yang dipilih dihalaman Home
      *
      * @param asal
      * @param tujuan
-     * @return
+     * @return Array list model kereta
      */
-    public static List<Kereta> getKereta(String asal, String tujuan) {
+    public static List<Kereta> getKereta(String asal, String tujuan, String tipe) {
         if (asal == null || tujuan == null) {
             JOptionPane.showMessageDialog(null, "Wajib input asal dan tujuan", "Error", JOptionPane.ERROR_MESSAGE);
         }
 
-        allKereta = new KeretaDAO().getKereta(asal, tujuan);
+        allKereta = new KeretaDAO().getKereta(asal, tujuan, tipe);
         return allKereta;
     }
 
     /**
-     * Method untuk menampilkan sebuah pilihan kereta yang tersedia berupa button
+     * Method untuk menampilkan pilihan kereta yang tersedia berupa button
      *
      * @param panel
      * @param allKereta

@@ -15,7 +15,6 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import Model.Kereta;
 
 /**
@@ -31,7 +30,7 @@ public class TicketDAO implements TicketImplement {
      *
      * @param kereta_id
      * @param tanggal
-     * @return
+     * @return Semua ticket yang sudah sold out
      */
     @Override
     public List<Ticket> getSeat(int kereta_id, String tanggal) {
@@ -54,6 +53,15 @@ public class TicketDAO implements TicketImplement {
         }
     }
 
+    /**
+     * Method untuk melakukan query sql insert ke table ticket
+     * 
+     * @param idTransaction
+     * @param idCustomer
+     * @param kereta
+     * @param seat
+     * @param tanggal
+     */
     @Override
     public void insertTicket(int idTransaction, int idCustomer, Kereta kereta, Seat seat, String tanggal) {
         try {
@@ -74,10 +82,10 @@ public class TicketDAO implements TicketImplement {
     }
 
     /**
-     * Method melakukan query sql Get all data customer yang di relasikan dengan table ticket dan kereta, berdasarkan idtransaction yang dikirim
+     * Method melakukan query sql Get all data customer yang di relasikan dengan table ticket dan kereta, yang sesuai dengan idtransaction yang dikirim
      *
      * @param id
-     * @return
+     * @return Detail transaction ( data customer, seat, dan kereta )
      */
     @Override
     public ResultSet getDetailTransaction(String id) {

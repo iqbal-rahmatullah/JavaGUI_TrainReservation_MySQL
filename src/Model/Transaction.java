@@ -12,18 +12,38 @@ public class Transaction {
     private int id;
     private String date;
 
+    /**
+     * Getter id transaction
+     *
+     * @return id transaction
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Setter id transaction
+     *
+     * @param id
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Getter tanggal transaction
+     *
+     * @return tanggal transaction
+     */
     public String getDate() {
         return date;
     }
 
+    /**
+     * Setter tanggal transaction
+     *
+     * @param date
+     */
     public void setDate(String date) {
         this.date = date;
     }

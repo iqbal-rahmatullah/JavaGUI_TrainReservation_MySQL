@@ -12,6 +12,6 @@ import Model.Kereta;
  * @author iqbalrahmatullah
  */
 public interface KeretaImplement {
-    public  List<Kereta> getKereta(String asal, String tujuan);
-    public List<Kereta> getTujuan(String asal);
+    public  List<Kereta> getKereta(String asal, String tujuan, String tipe);
+    public List<Kereta> getTujuan(String asal, String tipe);
 }

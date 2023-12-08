@@ -25,7 +25,7 @@ public class CustomerDAO implements CustomerImplement {
      * Method untuk melakukan query insert ke table customer di database
      * Setiap setelah melakukan insert ke table customer, juga akan melakukan insert ke table ticket
      *
-     * @param customer ( Data-data dari customer )
+     * @param customer 
      * @param idTransaction 
      * @param kereta 
      * @param seat

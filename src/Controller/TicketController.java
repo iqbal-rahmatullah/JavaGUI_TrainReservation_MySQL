@@ -36,7 +36,7 @@ public class TicketController {
      *
      * @param keretaId
      * @param tanggal
-     * @return
+     * @return semua ticket yang sudah sold
      */
     public static List<Ticket> getSeat(int keretaId, String tanggal) {
         allTicket = new TicketDAO().getSeat(keretaId, tanggal);
@@ -44,7 +44,8 @@ public class TicketController {
     }
 
     /**
-     * Method untuk menampilkan pilihan semua seat yang ada di kereta berupa button
+     * Method untuk menampilkan pilihan semua seat yang ada di kereta dengan JToggleButton
+     * Method ini juga mengecek, jika ticket sudah sold maka button akan disable
      *
      * @param seatSold
      * @param parentPanel
@@ -97,7 +98,7 @@ public class TicketController {
     }
 
     /**
-     * Method untuk menghandle button seat yang dipilih oleh user. Didalam method ini juga melakukan pengecekan seat yang sudah sold button nya akan di disable
+     * Inner class untuk menghandle button seat yang dipilih oleh user. 
      */
     public static class handleSelectSeat {
 
@@ -107,6 +108,14 @@ public class TicketController {
         private String tipe;
         private List<String> checkSeat;
 
+        /**
+         * Constructor serta melakukan penambahan actionListener ke semua JToggleButton Seat berupa method getSelectedSeat
+         *
+         * @param btnSeat
+         * @param jumlahTicket
+         * @param seatSold
+         * @param tipe
+         */
         public handleSelectSeat(JToggleButton[] btnSeat, int jumlahTicket, List<Ticket> seatSold, String tipe) {
             this.btnSeat = btnSeat;
             this.jumlahTicket = jumlahTicket;
@@ -127,6 +136,13 @@ public class TicketController {
             }
         }
 
+        /**
+         * Menghandle jika JToggleButton di select maka warna font akan berubah menjadi warna biru dan data nya akan disimpan di variabel seatSelected dan checkseat
+         * Menghandle jika JToggleButton di uncheck maka warna font nya dihilangkan, serta di hapus dari variabel seatSelected dan checkseat
+         * Melakukan pengecekan agar user tidak memilih seat lebih banyak dari jumlah ticket yang di order, ketika melebihi jumlah order maka semua JToggleButton di disable
+         * Melakukan handling agar Ticket yang sold button nya ter disabled terus
+         *
+         */
         public void getSelectedSeat() {
             TicketController.seatSelected = new ArrayList<Seat>();
 

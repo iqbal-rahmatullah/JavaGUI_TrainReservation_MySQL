@@ -6,7 +6,6 @@ package View;
 
 import Controller.KeretaController;
 import Model.Kereta;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -22,7 +21,7 @@ public class SelectKereta extends javax.swing.JFrame {
     
     public SelectKereta(String asal, String tujuan, int jumlahTicket, String tipe, String tanggal ) {
         initComponents();
-        allKereta = KeretaController.getKereta(asal, tujuan);
+        allKereta = KeretaController.getKereta(asal, tujuan, tipe);
         
         new KeretaController().displayButtonKereta(keretaPanel, allKereta, jumlahTicket, tipe, this, tanggal);
     }

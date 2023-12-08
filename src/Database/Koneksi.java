@@ -15,6 +15,11 @@ import javax.swing.JOptionPane;
 public class Koneksi {
     private static Connection conn;
     
+    /**
+     * Method untuk menghubungkan java GUI ke database mysql
+     *
+     * @return koneksi dari mysql
+     */
     public static Connection getConnection() {
         if(conn == null) {
             try {

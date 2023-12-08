@@ -48,6 +48,10 @@ public class CustomerController {
         cekCountCustomer();
     }
     
+    /**
+     * Method untuk melakukan pengecekan jumlah customer agar tidak lebih dari jumlah ticket yang di inputkan
+     *
+     */
     public static void cekCountCustomer() {
          if(FormBooking.daftarPenumpang != null) {
             if(FormBooking.daftarPenumpang.size() == FormBooking.jumlahTicket) {

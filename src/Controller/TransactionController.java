@@ -32,14 +32,15 @@ public class TransactionController {
      * Melakukan method add transaction dengan mengirim tanggal transaksi terjadi
      *
      * @param tanggal
-     * @return
+     * @return id transaction yang di gunakan untuk insert ke table ticket di database
      */
     public static int addTransaction(String tanggal) {
         return new TransactionDAO().insertTransaction(tanggal);
     }
 
     /**
-     * Method untuk melakukan set data transaction yang terjadi ke JTable yang ada di page HistoryTransaction
+     * Method untuk melakukan set data semua transaction di database ke JTable yang ada di page HistoryTransaction
+     * Serta memberikan handle pada row JTable ketika di click akan di arahkan ke method handleDetailTransaction
      *
      * @param transactionTable
      * @param historyPage
@@ -66,7 +67,7 @@ public class TransactionController {
     }
 
     /**
-     * Melakukan handle ketika data transaction di click, maka akan menampilkan detail lengkap transaction tersebut
+     * Melakukan handle ketika row data transaction di click, maka akan menampilkan detail lengkap transaction tersebut
      *
      * @param id
      * @param HistoryPage

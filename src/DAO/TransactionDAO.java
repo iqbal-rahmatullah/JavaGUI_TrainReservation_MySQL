@@ -48,9 +48,9 @@ public class TransactionDAO implements TransactionImplement {
     }
 
     /**
-     * Melakukan query get all data transaction yang ada dan mengambil relasi juga ke table ticket.
+     * Melakukan query get all data transaction yang ada dan mengambil relasi juga ke table ticket, untuk mendapatkan jumlah ticket yang dipesan di transaction tersebut.
      *
-     * @return
+     * @return Detail transaction dan jumlah ticket yang dipesan di transaction tersebut
      */
     @Override
     public ResultSet getTransaction() {

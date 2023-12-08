@@ -23,19 +23,19 @@ public class KeretaDAO implements KeretaImplement {
     private List<Kereta> allKereta;
 
     /**
-     * Method untuk melakukan query get(mendapatkan) semua kereta yang ada berdasarkan asal dan tujuan yang di inputkan
+     * Method untuk melakukan query get(mendapatkan) semua kereta yang ada berdasarkan asal dan tujuan yang di inputkan, serta tipe yang dipilih (Lokal/antarkota)
      *
      * @param asal
      * @param tujuan
      * @return
      */
     @Override
-    public List<Kereta> getKereta(String asal, String tujuan) {
+    public List<Kereta> getKereta(String asal, String tujuan, String tipe) {
         allKereta = new ArrayList<Kereta>();
 
         try {
             Statement statement = Koneksi.getConnection().createStatement();
-            ResultSet result = statement.executeQuery("SELECT * FROM kereta WHERE asal='" + asal + "' AND tujuan='" + tujuan + "'");
+            ResultSet result = statement.executeQuery("SELECT * FROM kereta WHERE asal='" + asal + "' AND tujuan='" + tujuan + "' AND tipe='" + tipe + "'");
 
             while (result.next()) {
                 Kereta kereta = new Kereta();
@@ -56,18 +56,18 @@ public class KeretaDAO implements KeretaImplement {
     }
 
     /**
-     * Melakukan query get (mendapatkan) tujuan dari semua kereta yang ada di database berdasarkan asal yang di pilih
+     * Melakukan query get (mendapatkan) tujuan dari semua kereta yang ada di database berdasarkan asal, dan tipe yang dipilih
      *
      * @param asal
      * @return
      */
     @Override
-    public List<Kereta> getTujuan(String asal) {
+    public List<Kereta> getTujuan(String asal, String tipe) {
         allKereta = new ArrayList<Kereta>();
         
         try {
             Statement statement = Database.Koneksi.getConnection().createStatement();
-            ResultSet result = statement.executeQuery("SELECT DISTINCT tujuan FROM kereta WHERE asal='" + asal + "'");
+            ResultSet result = statement.executeQuery("SELECT DISTINCT tujuan FROM kereta WHERE asal='" + asal + "' AND tipe='" + tipe + "'");
             
             while(result.next()) {
                 Kereta tujuan = new Kereta();
